@@ -89,7 +89,7 @@ graphics_toolkit ("gnuplot")
 plotyy(FechasE,DatosE(:,10),FechasMc,DatosMc(:,6))
 subplot(2,1,2)
 graphics_toolkit ("qt")
-scatter(DatosE(FechasE_Match,10),DatosMc(FechasMc_Match,6))
+scatter(DatosE(FechasE_Match,10),DatosMc(FechasMc_Match,6));
 
 % Temperatura
 figure(4)
