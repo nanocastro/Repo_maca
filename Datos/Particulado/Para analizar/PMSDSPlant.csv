@@ -1,4 +1,4 @@
-Dia;Mes;Año;Hora ;Minuto;Humedad;Temperatura;P25;P10;P1;P25;P10
+Dia;Mes;Año;Hora ;Minuto;Humedad;Temperatura;SDS-P25;SDS-P10;PL-P1;PL-P25;PL-P10
 28;2;2018;0;0;79;18.8;1;2.4;3;5;5
 28;2;2018;0;1;78.5;18.8;0.9;1.5;3;5;5
 28;2;2018;0;2;77.9;18.8;0.8;2;1;1;1

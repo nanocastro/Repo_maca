@@ -11,8 +11,6 @@ Se registran datos cada un minuto y se almacenan en una tarjeta SD con fecha y h
 #include <RTClib.h>
 #include <Wire.h>
 #include <dht.h>
-//#include <stdlib.h>
-
 
 #define an_aux 5.0/1024
 
@@ -33,9 +31,6 @@ int flag = 0, flag_8 = 1, flag_9 = 1, flag_19 = 1, flag_t=1;                    
 int ciclo = 0;
 bool flag_shinyei=1;
 int total_10=0,total_25=0;
-
-//float mediciones[10] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-
 
 dht DHT;
 RTC_DS3231 rtc;
@@ -59,7 +54,6 @@ SDS011 my_sds;
 void setup() {
   my_sds.begin(2,3);
   Serial.begin(9600);
-  //serialPc.begin(9600);
   //Interrupciones de encendido de bluetooth y de LPO del shinyei
   pinMode(8, INPUT_PULLUP);       //P25
   pinMode(9, INPUT_PULLUP);       //P10
@@ -73,21 +67,15 @@ void setup() {
 
   if (!SD.begin(chipSelect)) {      //Inicio de tarjeta SD
     Serial.println("Card failed, or not present");
-    //serialPc.println("Card failed, or not present");
     error = true;
   } else {
     Serial.println("SD card OK");
-    //serialPc.println("SD card OK");
   }
-  
-  //serialSDS.begin(9600);
   
   DateTime now_ = rtc.now();
 
   filename = String(now_.day());
-  //filename += "_";
   filename += String(now_.month());
-  //filename += "_";
   filename += String(now_.year() - 2000);
   filename += ".txt";
 
@@ -99,7 +87,6 @@ void setup() {
     archivo.println(filename);
     archivo.close();
     Serial.println("SD data");
-   // serialPc.println("SD data");
   }
   
 
@@ -123,7 +110,6 @@ void loop() {
   }
 
   if (Serial.available()) {
-  //if (serialPc.available()) {
     comandos_terminal(filename);
   }
 }
@@ -135,11 +121,10 @@ void leer() {
   chk = DHT.read22(9);
   
   SDSerror = my_sds.read(&p25,&p10);
+  
   if (! SDSerror) {
     Serial.println("P2.5: "+String(p25));
     Serial.println("P10:  "+String(p10));
-    //serialPc.println("P2.5: "+String(p25));
-    //serialPc.println("P10:  "+String(p10));
   }
   
 
@@ -176,17 +161,13 @@ void send_txt(String file, bool serial) {
   if (serial == true) {
     if (archivo) {
       Serial.println(file);
-      //serialPc.println(file);
       while (archivo.available()) {     //envia todos los caracteres contenidos en el txt
         Serial.write(archivo.read());
-        //serialPc.write(archivo.read());
       }
       archivo.close();
-      //Serial.println(millis());         //Tiempo que tardo en enviar el archivo caracter por caracter
     }
     else {
       Serial.println("error opening TXT");
-      //serialPc.println("error opening TXT");
     }
   }
 }
@@ -211,7 +192,6 @@ void ciclo_lectura() {
    Serial.println("-");
    Serial.println(filename);
     Serial.println("..");
-  //serialPc.println(dataFile);
   if (dFile) {
     if (dia == true) {
       String encabezado = "Hora,O3,NO2,CO,Humedad,Temperatura,P25,P10";
@@ -222,45 +202,8 @@ void ciclo_lectura() {
     dFile.close();
     Serial.println("Datos SD");
     Serial.println(dataString);
-    //serialPc.println("Datos SD");
-    //serialPc.println(dataString);
   }
-
 }
-
-
-
-
-//Esta funcion esta para ver el contenido de ls SD, quizas despues no se use
-void printDirectory(File dir, int numTabs) {
-  while (true) {
-    File entry =  dir.openNextFile();
-    if (! entry) {
-      // No hay mas archivos
-      break;
-    }
-    for (uint8_t i = 0; i < numTabs; i++) {
-      //serialPc.print('\t');
-      Serial.print('\t');
-    }
-    Serial.print(entry.name());
-        //serialPc.print(entry.name());
-    if (entry.isDirectory()) {
-      Serial.println("/");
-      //serialPc.println("/");
-      printDirectory(entry, numTabs + 1);
-    } else {
-      // files have sizes, directories do not
-      Serial.print("\t\t");
-      Serial.println(entry.size(), DEC);
-      //serialPc.print("\t\t");
-      //serialPc.println(entry.size(), DEC);
-    }
-    entry.close();
-  }
-
-}
-
 
 void comandos_terminal(String nombre) {
 
@@ -269,8 +212,6 @@ void comandos_terminal(String nombre) {
 
  while(Serial.available()) {
     sel_t =  Serial.read();   //Se queda esperando un caracter enviado 
- //while(serialPc.available()) {
-    //sel_t =  serialPc.read();   //Se queda esperando un caracter enviado 
     com_term.concat(sel_t);
     com_term_char[j] = sel_t;
     j++;
@@ -299,7 +240,6 @@ void comandos_terminal(String nombre) {
   if (flag_t == 0) {
     if (com_term_char[0] == 'p') {
       Serial.println(com_term_char[1]);
-     //serialPc.println(com_term_char[1]);
      for(r=2;r<16;r++){
         if (com_term_char[r] == '#') {
           break;
@@ -307,59 +247,33 @@ void comandos_terminal(String nombre) {
         aux = aux * 10 + (com_term_char[r] - '0');
         Serial.println(aux);
         Serial.println(r);
-        //serialPc.println(aux);
-        //serialPc.println(r);
         r++;
       }
-      /*if (com_term_char[1] == '1') {
-        pow1 = aux;
-      }
-      if (com_term_char[1] == '2') {
-        pow2 = aux;
-      }
-      if (com_term_char[1] == '3') {
-        pow3 = aux;
-      }*/
     }
     if (com_term == "a#") {
       Serial.println(nombre);
-      //serialPc.println(nombre);
       send_txt(nombre, true);
     } else if (com_term == "b#") {
       Serial.println("Eco");
-      //serialPc.println("Eco");
     } else if (com_term == "l#") {
       root = SD.open("/");
       printDirectory(root, 0);
       Serial.println("Ok");
-      //serialPc.println("Ok");
     } else if (com_term == "i#") {
       leer();
-      //serialPc.println(dataString);
       Serial.println(dataString);
     } else if (com_term == "v#") {
       Serial.println(v_0);
-       //serialPc.println(v_0);
-    } else if (com_term == "m#") {
-      int y = 0;
-      for (y = 0; y < 10; y++) {
-       // Serial.println(mediciones[y], 5);
-        //serialPc.println(mediciones[y], 5);
-      }
     } else if (com_term == "p#") {
       int y = 0;
       for (y = 0; y < 3; y++) {
         Serial.println(p25);
         Serial.println(p10);
-        //serialPc.println(p25);
-        //serialPc.println(p10);
       }
     } else if (com_term == "t#") {
       Serial.println(timer);
-      //serialPc.println(timer);
     } else if (com_term == "ff#") {
       Serial.println(filename);
-      //serialPc.println(filename);
     }
     flag_t = 1;
   }

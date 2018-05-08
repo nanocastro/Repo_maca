@@ -20,7 +20,7 @@ Sería bueno agregar un comando que permita seleccionar los archivos a descargar
 
 
 int  timer = 0, timer2 = 0;                                                      //Variables auxiliares para contar segundos y ciclos
-bool error = false, blue = false, dia = false, calentar = true;                                   //Banderas de error bluetooth y cambio de archivo
+bool error = false, blue = false, dia = false, calentar = true;                  //Banderas de error bluetooth y cambio de archivo
 bool  flag_lectura = false, flag_grabar = false;
 
 float p10,p25;
@@ -33,19 +33,18 @@ int ciclo = 0;
 bool flag_shinyei=1;
 unsigned long total_10_1=0,total_25_1=0,total_10_2=0,total_25_2=0;
 
-unsigned long micros_end_10, micros_init_10, micros_t_10;                                         //Tiempo en milisegundos de LPO del shinyei
+unsigned long micros_end_10, micros_init_10, micros_t_10;                                         //Tiempo en microsegundos de LPO del shinyei
 unsigned long micros_end_25, micros_init_25, micros_t_25;
 unsigned long millis_end_10, millis_init_10, millis_t_10;                                         //Tiempo en milisegundos de LPO del shinyei
 unsigned long millis_end_25, millis_init_25, millis_t_25;
 
-dht DHT;
-RTC_DS3231 rtc;
-PMS pms(Serial2);
-SDS011 my_sds(Serial1);
+dht DHT;                      //Sensor de humedad y temperatura
+RTC_DS3231 rtc;               //Rtc clock
+PMS pms(Serial2);             //Plantower sensor de particulado
 PMS::DATA data;
-//SDS011 my_sds;
+SDS011 my_sds(Serial1);       //Nova sensor de particulado
 
-String com_blue, com_term;
+String com_blue, com_term;    //Cadena de caracterese recibida de terminal o bluetooth
 int j = 0, aux = 0, r = 2;
 char com_term_char[16];
 char com_blue_char[16];
@@ -59,7 +58,6 @@ int chk;
 
 void setup() {
   
-  //my_sds.begin(19,18);
   Serial.begin(9600);
   Serial1.begin(9600);
   Serial2.begin(9600);
@@ -78,6 +76,7 @@ void setup() {
     Serial.println("RTC ERROR");
     error = true;
   }
+  
   //rtc.adjust(DateTime(2018, 3, 20, 20, 32, 10));      //Para ajustar la fecha en caso de que se haya quedado sin bateria
 
   if (!SD.begin(chipSelect)) {                          //Inicio de tarjeta SD
@@ -124,11 +123,11 @@ void loop() {
 
   
   if (flag_lectura == true) {
-    leer();       //Lectura de entradas analogicas
+    leer();                   //Lectura de entradas analogicas
     flag_lectura = false;
   }
   if (flag_grabar == true) {
-    ciclo_lectura();
+    ciclo_lectura();          //Cargado de datos a SD
     flag_grabar = false;
   }
 

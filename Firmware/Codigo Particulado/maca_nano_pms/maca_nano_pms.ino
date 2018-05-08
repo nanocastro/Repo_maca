@@ -15,19 +15,17 @@ Registro de datos cada un minuto y almacenamiento en SD con fecha y hora provist
 
 #define an_aux 5.0/1024
 
-//int v0 = 0, v1 = 0, v2 = 0;               //Variables de medicion de tension del ADC
-//float v_0 = 0, v_1 = 0, v_2 = 0;   //Variables escaladas a tension de referencia, con decimales de precision
 int timer = 0, timer2 = 0;                                                      //Variables auxiliares para contar segundos y ciclos
-bool error = false, blue = false, dia = false, calentar = true;                                   //Banderas de error bluetooth y cambio de archivo
+bool error = false, blue = false, dia = false, calentar = true;                 //Banderas de error bluetooth y cambio de archivo
 bool  flag_lectura = false, flag_grabar = false, flag_t = false;
 
 int state = 0;
 int ciclo = 0;
 
-dht DHT;
-RTC_DS3231 rtc;
+dht DHT;          //Sensor de humedad y termperatura
+RTC_DS3231 rtc;   //Reloj RTC
 
-String com_term;
+String com_term;            //Cadena de caracteres recibida de terminal
 int j = 0, aux = 0, r = 2;
 char com_term_char[16];
 
@@ -35,11 +33,11 @@ char com_term_char[16];
 String filename;
 String dataString;
 
-File dataFile;//, root;
+File dataFile;
 DateTime hora, anterior;
-SoftwareSerial serialPc(2, 3);
+SoftwareSerial serialPc(2, 3);  //Emular puerto serie
 
-PMS pms(serialPc);
+PMS pms(serialPc);      //Plantower sensor particulado
 PMS::DATA data;
 
 const int chipSelect = 10;         //53                       //SS de SPI
@@ -99,11 +97,11 @@ void setup() {
 void loop() {
 
   if (flag_lectura == true) {
-    leer();       //Lectura de entradas analogicas
+    leer();                   //Lectura de entradas analogicas
     flag_lectura = false;
   }
   if (flag_grabar == true) {
-    ciclo_lectura();
+    ciclo_lectura();          //Carga de datos a SD
     flag_grabar = false;
   }
 
@@ -124,28 +122,8 @@ void leer() {
   int v5 = analogRead(A7);
 
   chk = DHT.read11(9);
-
-  /* v_0 = v0 * an_aux;    //Escalado de los valores medidos del ADC
-    v_1 = v1 * an_aux;    //v_0 representa cuantos V tengo en la alimentacion para ajustar el rango de la Vref
-    v_2 = v2 * an_aux;
-  */
   anterior = hora;
   hora = rtc.now();
-
-  //  while(serialPc.available()){
-  //    char sel_pms;
-  //    sel_pms=serialPc.read();
-  //    Serial.print(sel_pms);
-  //  }
-  //  Serial.println();
-  if (pms.read(data, 2000)) {
-    Serial.println("PMS");
-    Serial.println(data.PM_AE_UG_1_0);
-    Serial.println(data.PM_AE_UG_2_5);
-    Serial.println(data.PM_AE_UG_10_0);
-  } else {
-    Serial.println("NoPMS");
-  }
 
   dataString = String(hora.day()) + "/" + String(hora.month()) + "/" + String(hora.year() - 2000) + "-";
   dataString += String(hora.hour());
@@ -226,34 +204,6 @@ void ciclo_lectura() {
 
 }
 
-
-//
-////Esta funcion esta para ver el contenido de ls SD, quizas despues no se use
-//void printDirectory(File dir, int numTabs) {
-//  while (true) {
-//    File entry =  dir.openNextFile();
-//    if (! entry) {
-//      // No hay mas archivos
-//      break;
-//    }
-//    for (uint8_t i = 0; i < numTabs; i++) {
-//      Serial.print('\t');
-//    }
-//    Serial.print(entry.name());
-//    if (entry.isDirectory()) {
-//      Serial.println("/");
-//      printDirectory(entry, numTabs + 1);
-//    } else {
-//      // files have sizes, directories do not
-//      Serial.print("\t\t");
-//      Serial.println(entry.size(), DEC);
-//    }
-//    entry.close();
-//  }
-//
-//}
-
-
 void comandos_terminal(String nombre) {
 
   char sel_t, arreglo[nombre.length() + 1];
@@ -304,11 +254,6 @@ void comandos_terminal(String nombre) {
       send_txt(nombre, true);
     } else if (com_term == "b#") {
       Serial.println("Eco");
-
-      //    }else if (com_term == "l#") {
-      //      root = SD.open("/");
-      //      printDirectory(root, 0);
-      //      Serial.println("Ok");
     } else if (com_term == "i#") {
       leer();
       Serial.println(dataString);
