@@ -1,4 +1,4 @@
-Día,Mes ,Anio,Hora,Minuto,NO,NO2,NOx,PM10,O3,Temperatura,DV,Velocidad,HR,CO,SO2
+Dia,Mes,Anio,Hora,Minuto,NO,NO2,NOx,PM10,O3,Temperatura,DV,Velocidad,HR,CO,SO2
 ,,,,,ppb,ppb,ppb,ug/m3,ppb,ºC,ºN,m/s,%,ppm,ppb
 3,1,2018,14,15,151.9,168.2,151.1,101,83.8,-2,103,16.55,30,7.2,48.1
 3,1,2018,14,30,3.4,27.5,3.5,37,5.7,9,151,2.57,0,6.5,48.1
