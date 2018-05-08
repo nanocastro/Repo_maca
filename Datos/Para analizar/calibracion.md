@@ -43,14 +43,14 @@ digital: tension medida (0 a 5V) convertida a un valor de 0-1024
 - Los datos de humedad relativa y temperatura low-cost se tienen que calibrar también (aunque quizas se deban usar en las regresiones de calibración de los gases los datos de T y HR de la referencia y no los de cada equipo low-cost)  
 - los datos de ambos equipos low-cost deberian correlacionar entre si, aunque es posible que no lo hagan debido a procesos de manufactura que llevan a baja reproducibilidad. Entonces cada sensor se calibra a la referencia por separado)
 
-## Limitaciones conocidas de los sensores de gases MOx (metal oxide)
-- output signal of MOx sensors is inﬂuenced by the concentrations of both the target and interfering gases,as well as the temperature and humidity effects
-- baseline drift over time, caused by either changes in the heat output of the sensing element or due to poisoning (irreversible bonding) to the the sensor surface
-
-## Métodos utilizados para la calibración en 
+## Métodos utilizados para la calibración en bibliografía 
 - Regresión lineal: 
   La función de calibración es: Rs=aX+b donde Rs es la respuesta del sensor, X es la medicion de referencia. 
 - Regresión lineal multivariable
+
+## Limitaciones conocidas de los sensores de gases MOx (metal oxide)
+- output signal of MOx sensors is inﬂuenced by the concentrations of both the target and interfering gases,as well as the temperature and humidity effects
+- baseline drift over time, caused by either changes in the heat output of the sensing element or due to poisoning (irreversible bonding) to the the sensor surface
 
 ## Notas adicionales: Calculos de resistencia equipos low-cost
 Los valores de resistencia (ohm) se obtienen de la siguiente forma:  
