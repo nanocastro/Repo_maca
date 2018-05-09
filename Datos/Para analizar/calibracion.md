@@ -44,9 +44,15 @@ digital: tension medida (0 a 5V) convertida a un valor de 0-1024
 - los datos de ambos equipos low-cost deberian correlacionar entre si, aunque es posible que no lo hagan debido a procesos de manufactura que llevan a baja reproducibilidad. Entonces cada sensor se calibra a la referencia por separado)
 
 ## Métodos utilizados para la calibración en bibliografía 
-- Regresión lineal: 
+[Según L. Spinelle et al. 2015)](https://github.com/nanocastro/Repo_maca/blob/master/Referencias/Gases%20-%20ML/Spinelle%20-%202015%20-%20Calibration%20low%20cost%20sensors%20O3%20y%20NO2.pdf) 
+  - Regresión lineal: 
   La función de calibración es: Rs=aX+b donde Rs es la respuesta del sensor, X es la medicion de referencia. 
-- Regresión lineal multivariable
+  - Regresión lineal multivariable usando método de minimos cuadrados 
+    - Para NO2 (sensor MICS-2710): 
+      Rs = a*NO2 + b*O3 + c*T + d
+      Donde: Rs es la respuesta del sensor; NO2, O3 y T mediciones de referencia; a,b,c y d los parámetros de la regresión (una duda: una vez hecha la regresión y obtenido los parámetros O3 y T deberían ser tb medidos con el equipo low-cost no? entonces porque calibra con los valores de referencia?)  
+  - Artificial Neural Network (ANN) 
+    - Leo pero no entiendo mucho... en todo caso veamos esto juntos. 
 
 ## Limitaciones conocidas de los sensores de gases MOx (metal oxide)
 - output signal of MOx sensors is inﬂuenced by the concentrations of both the target and interfering gases,as well as the temperature and humidity effects
