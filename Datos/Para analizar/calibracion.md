@@ -1,6 +1,6 @@
 # Notas para calibración - ML
 
-La idea de este Readme es proporcionar la info necesaria para poder colaborar en la calibración de sensores de bajo costo de tipo MOx (metal oxide) midiendo en campo junto a un equipo de referencia.  
+La idea de este Readme es proporcionar la info necesaria para poder colaborar en la calibración de sensores de bajo costo para gases de tipo MOx (metal oxide) y para PM (ópticos) midiendo en campo junto a un equipo de referencia.  
 El objetivo sería dejar una especie de template que sirva para que otrxs que necesiten calibrar sensores low-cost cuenten con una especia de guía.   
 La idea es hacerlo en JupyterLab o similar (ej. https://github.com/patex1987/Temperature-Calibration/blob/master/Temperature_calibration.ipynb)  
 
@@ -44,7 +44,7 @@ digital: tension medida (0 a 5V) convertida a un valor de 0-1024
 - los datos de ambos equipos low-cost deberian correlacionar entre si, aunque es posible que no lo hagan debido a procesos de manufactura que llevan a baja reproducibilidad. Entonces cada sensor se calibra a la referencia por separado)
 
 ## Métodos utilizados para la calibración en bibliografía 
-[Review](https://github.com/nanocastro/Repo_maca/blob/master/Referencias/Gases%20-%20ML/air-quality-sensors-and-data-adjustment-algorithms.pdf) de los algoritmos usados para el ajuste de datos 
+[Review bibliográfica](https://github.com/nanocastro/Repo_maca/blob/master/Referencias/Gases%20-%20ML/air-quality-sensors-and-data-adjustment-algorithms.pdf) con algunas consideraciones respecto a los algoritmos usados para el ajuste de datos de sensores de calidad de aire. 
 
 ### Para NO2 (sensor MICS-2710)
 Según [Spinelle et al. 2015](https://github.com/nanocastro/Repo_maca/blob/master/Referencias/Gases%20-%20ML/Spinelle%20-%202015%20-%20Calibration%20low%20cost%20sensors%20O3%20y%20NO2.pdf) 
@@ -58,6 +58,7 @@ Según [Spinelle et al. 2015](https://github.com/nanocastro/Repo_maca/blob/maste
     - Leo pero no entiendo mucho... en todo caso veamos esto juntos. 
 
 ### Para O3
+
 
 
 ### Para PM10
