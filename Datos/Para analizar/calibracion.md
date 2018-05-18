@@ -38,7 +38,7 @@ ohm: valor de resistencia medida de los sensores (usar estos en la calibración!
 digital: tension medida (0 a 5V) convertida a un valor de 0-1024  
 
 ## Consideraciones para la calibraciòn 
-- Los equipos low-cost guardan 1 dato por minuto. Los de referencia 1 dato cada 15 minutos. A los fines de comparar Se tendrían que promediar los valores de los sensores MOx para tener 1 dato cada 15 minutos. 
+- Los equipos low-cost guardan 1 dato por minuto. Los de referencia 1 dato cada 15 minutos hasta las 15 del 5/1 y cada 4 min a partir de ahi. A los fines de comparar Se tendrían que promediar los valores de los sensores MOx para tener 1 dato por cada medición de ref. 
 - se usa entre el 15-20 % de los datos para calibración y el resto para predecir (segun biblio, el tema seria elegir ese porcentaje, lo mejor parece elegir en la mitad del periodo de 18 dias)
 - Los datos de humedad relativa y temperatura low-cost se tienen que calibrar también (aunque quizas se deban usar en las regresiones de calibración de los gases los datos de T y HR de la referencia y no los de cada equipo low-cost)  
 - los datos de ambos equipos low-cost deberian correlacionar entre si, aunque es posible que no lo hagan debido a procesos de manufactura que llevan a baja reproducibilidad. Entonces cada sensor se calibra a la referencia por separado)
