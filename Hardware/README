@@ -1,7 +1,14 @@
 # README
-Please refer to "pcb_2_abril.pdf" file when assembly.
+Please refer to "MACA PCB Description.pdf" file when assembly.
 There are two wired jumpers marked (with red circles and lines) that connect the voltage supply net.
 
-The latest schematic is the one named "MACA_PCB.pdf", this schematic has been made in kicad due 
-to file corruption of the previous ones (made with proteus). The new pcb board is not yet finished (at 1st May) 
+For gases concentration measurement:
+The latest schematic is the one named "MACA Esquematico.pdf", this schematic has been made in kicad due 
+to file corruption of the previous ones (made with proteus). The new pcb board is not yet finished (at 15th May) 
 but contains the same circuits and components as the previous PCB.  
+
+For particle measurent:
+There is a kicad project for an arduino mega 2560 shield that hosts several particle sensors and logs their measurement: 
+ - SDS011 
+ - PLantower S7003 
+ - Shinyei PPD42 

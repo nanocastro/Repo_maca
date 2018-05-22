@@ -1,0 +1,17 @@
+"Id";"Identificador";"Empaquetado";"Cantidad";"Identificación";"Suministrador y ref";
+1;"SHIELD1";"ARDUINO_MEGA_SHIELDl";1;"ARDUINO_MEGA_SHIELD";;;
+2;"J4,J4";"Pin_Header_Straight_1x01_Pitch2.54mm";2;"Input_GND";;;
+3;"D1";"LED_D5.0mm";1;"Bluetooth_LED";;;
+4;"J5";"Pin_Header_Straight_1x01_Pitch2.54mm";1;"Input5v";;;
+5;"SW1";"Pin_Header_Straight_1x03_Pitch2.54mm";1;"Bluetooth_switch";;;
+6;"U1";"Pin_Header_Straight_1x04_Pitch2.54mm";1;"Bluetooth_HC06";;;
+7;"U4";"Pin_Header_Straight_1x06_Pitch2.54mm";1;"SD_Module";;;
+8;"U5";"Pin_Header_Straight_1x06_Pitch2.54mm";1;"RTCClock";;;
+9;"U6";"Pin_Header_Straight_1x04_Pitch2.54mm";1;"DHT";;;
+10;"R1";"R_Axial_DIN0204_L3.6mm_D1.6mm_P7.62mm_Horizontal";1;"1k";;;
+11;"U2";"Pin_Header_Straight_1x04_Pitch2.54mm";1;"SDS011";;;
+12;"U3";"Pin_Header_Straight_1x04_Pitch2.54mm";1;"Plantower_PMs7000";;;
+13;"Q1";"TO-92_Inline_Narrow_Oval";1;"BC337";;;
+14;"U7";"Pin_Header_Straight_1x04_Pitch2.54mm";1;"Shinyei";;;
+15;"J1";"Pin_Header_Straight_1x08_Pitch2.54mm";1;"Aux_Power_rail_gnd";;;
+16;"J2";"Pin_Header_Straight_1x08_Pitch2.54mm";1;"Aux_Power_Rail_Vin";;;
