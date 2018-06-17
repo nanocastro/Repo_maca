@@ -1,3 +1,4 @@
+# Hemos trasladado el repositorio a https://gitlab.com/nanocastro/Repo_maca
 # MACA
 ## Monitor Abierto de Calidad de Aire
 
